@@ -3,6 +3,9 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# ignore .env files
+.env
+
 # C extensions
 *.so
 

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather for {{ city | title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        
+        <!-- If there was an error, display it -->
+        {% if error %}
+            <h1>😔 Oops!</h1>
+            <div class="error" role="alert">
+              {{ error }}
+            </div>
+            <a href="{{ url_for('index') }}" class="back-link">← Try Again</a>
+
+        <!-- Otherwise, if we have weather data, display it -->
+        {% elif weather %}
+            <h1>Weather for {{ weather.city }}</h1>
+            <div class="weather-info">
+                <div class="location">{{ weather.city }}, {{ weather.country }}</div>
+                <div class="temperature">{{ weather.temperature }}&deg;C</div>
+                <div class="description">{{ weather.description | capitalize }}</div>
+
+                <div class="weather-details">
+                    <div class="detail-item">
+                        <strong>Feels Like</strong>
+                        <span>{{ weather.feels_like }}&deg;C</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>💨 Wind Speed</strong>
+                        <span>{{ weather.wind_speed }} km/h</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>💧 Humidity</strong>
+                        <span>{{ weather.humidity }}%</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>📊 Pressure</strong>
+                        <span>{{ weather.pressure }} hPa</span>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ url_for('index') }}" class="back-link">← Search for another city</a>
+        {% endif %}
+
+    </div>
+</body>
+</html>
